@@ -28,14 +28,26 @@ def main():
                 body {
                     font-family: monospace, sans-serif;
                     background: #f1eee5;
-                    margin-left: 0.5em;
-                    margin-right: 0.5em;
                 }
                 details {
                     padding: 0.2em;
-                    font-size:3em; 
-                    background: rgba(0,0,0,0.1);
-                    border-radius: 15px;
+                    font-size:2em; 
+                }
+                iframe { 
+                    width: 100%;
+                    height: 400px;
+                }
+                .row {
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    width: 100%;
+                }
+                @media only screen and (max-width: 1000px) {
+                    iframe { 
+                        width: 100%;
+                    }
                 }
            </style>
            <body>
@@ -48,15 +60,18 @@ def main():
         html += f"""
                  <details>
                  <summary>{name}</summary>
+                 <div class="row">
                  """
         for m, c in zip(ms, cs):
             html += f"""
-                       <div style="display:flex; width:100%; height:300px;">
-                           <iframe style="margin-left: 1em; width:50%; height:100%;" data-src="{m}"></iframe>
-                           <iframe style="margin-right: 1em; width:50%; height:100%;" data-src="{c}"></iframe>
-                       </div><br>
+                       <div style="padding: 10px;">
+                           <!--<iframe style="height:100%;" data-src="{m}"></iframe>-->
+                           <iframe class="column" data-src="{c}"></iframe>
+                       </div>
+                       <br>
                      """
         html += """
+                </div>
                 </details>
                 <hr>
                 """
@@ -87,3 +102,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
