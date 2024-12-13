@@ -20,8 +20,8 @@ def main():
 
     html = """
            <!DOCTYPE html>
-	       <html>
-	       <head>
+           <html>
+           <head>
                <meta charset="UTF-8">
            </head>
            <style>
@@ -32,45 +32,58 @@ def main():
                     margin-right: 0.5em;
                 }
                 details {
-                    padding: 1em;
+                    padding: 0.2em;
+                    font-size:3em; 
                     background: rgba(0,0,0,0.1);
                     border-radius: 15px;
-                }
-                @media only screen and (max-width: 900px) {
-                  body {
-                    margin-left: 10em;
-                    margin-right: 10em;
-                  }
                 }
            </style>
            <body>
                <div style="width:100%; height: 100vh;">
-            """
+    """
+
     for building in buildings:
         name = building[0]
         ms, cs = get_urls(building[1][0], building[1][1])
         html += f"""
-                <h1>{name}</h1>
-                <details>
-                """
+                 <details>
+                 <summary>{name}</summary>
+                 """
         for m, c in zip(ms, cs):
             html += f"""
                        <div style="display:flex; width:100%; height:300px;">
-	                       <iframe style="margin-left: 1em; width:50%; height:100%;" src="{m}"></iframe>
-	                       <iframe style="margin-right: 1em; width:50%; height:100%;" src="{c}"></iframe>
-	                   </div><br>
-	                  """
+                           <iframe style="margin-left: 1em; width:50%; height:100%;" data-src="{m}"></iframe>
+                           <iframe style="margin-right: 1em; width:50%; height:100%;" data-src="{c}"></iframe>
+                       </div><br>
+                     """
         html += """
                 </details>
                 <hr>
                 """
+
     html += """
                 </div>
+                <script>
+                  document.querySelectorAll('details').forEach(det => {
+                    det.addEventListener('toggle', () => {
+                      const iframes = det.querySelectorAll('iframe[data-src]');
+                      if (det.open) {
+                        iframes.forEach(ifr => {
+                          ifr.src = ifr.dataset.src;
+                        });
+                      } else {
+                        // Optionally clear src when closing to stop playback
+                        iframes.forEach(ifr => {
+                          ifr.src = '';
+                        });
+                      }
+                    });
+                  });
+                </script>
             </body>
             </html>
-            """
+    """
     print(html)
 
 if __name__ == "__main__":
     main()
-
