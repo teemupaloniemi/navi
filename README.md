@@ -44,3 +44,14 @@ agora = [["m2137966",
          ["Ag B301",                                                                                                                                                                                                     
           "Ag B201"]
 ``` 
+
+### Tilojen lisääminen
+
+Uusia tiloja voi lisätä:
+1. Erottelemalla linkin `https://navi.jyu.fi/space/m134380` kartta-ID:n `m134380`
+2. ja sitä seuraavan `avaa kalenteri` painikkeen takan olevan linkin `https://kovs-calendar.app.jyu.fi/room/Ag%20A102` kalenteri-ID:n `Ag A102`. 
+3. Lisäämällä ne tietorakenteeseen
+
+## Kontribuutiot
+
+Kannustan seuraamaan [https://www.conventionalcommits.org/en/v1.0.0/](https://www.conventionalcommits.org/en/v1.0.0/) mallia.
